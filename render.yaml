@@ -1,0 +1,22 @@
+services:
+  # Backend - Spring Boot Web Service
+  - type: web
+    name: xeno-backend
+    runtime: java
+    rootDir: backend
+    buildCommand: mvn clean package -DskipTests
+    startCommand: java -jar target/xenoAssignment-1.0-SNAPSHOT.jar
+    envVars:
+      - key: PORT
+        value: 8080
+
+  # Frontend - Vite React Static Site
+  - type: web
+    name: xeno-frontend
+    runtime: static
+    rootDir: frontend_temp
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://xeno-backend.onrender.com

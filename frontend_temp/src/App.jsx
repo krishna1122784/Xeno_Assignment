@@ -1,5 +1,7 @@
 import React, { useState, useRef } from 'react';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+
 function UniversalIngestionStudio() {
   const [file, setFile] = useState(null);
   const [headers, setHeaders] = useState([]);
@@ -66,7 +68,7 @@ function UniversalIngestionStudio() {
     formData.append('projectedColumns', selectedColumns.join(','));
 
     try {
-      const response = await fetch('http://localhost:8080/api/pipeline/process-universal', {
+      const response = await fetch(`${API_BASE_URL}/api/pipeline/process-universal`, {
         method: 'POST',
         body: formData,
       });
